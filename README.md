@@ -38,12 +38,11 @@ libraryDependencies ++= Seq(
   // API annotations
   "com.wordnik"          %  "swagger-annotations" % "1.3.10",
   // The following is only necessary if you're having trouble resolving dependencies
-  "javax.ws.rs"          % "jsr311-api"           % "1.1.1"   
-)
+  "javax.ws.rs"          % "jsr311-api"           % "1.1.1")
 
 // merge swaggerSettings into the project's settings
 lazy val myProject = Project(
-  id = "%s-%s" format("service", "example"),
+  id = "something-meaingful",
   base = file("."),
   settings = platformSettings ++
              dependencySettings ++
@@ -51,6 +50,10 @@ lazy val myProject = Project(
              ...
 )
 ```
+
+### Example
+
+Check https://github.com/hootsuite/sbt-swagger/tree/master/sbt-swagger-example directory. This is a small complete sample application that uses sbt-swagger.
 
 ### Usage
 
@@ -241,12 +244,8 @@ Submit a bug report and pull request in GitHub.
 
 ## Maintainers
 
-[Tatsuhiro Ujihisa](https://github.com/ujihisa) [@ujm](https://twitter.com/ujm)
-
-[Johnny Bufu](https://github.com/jbufu)
-
-[Diego Alvarez](https://github.com/d1egoaz) [@d1egoaz](https://twitter.com/d1egoaz)
-
-[Andres Rama](https://github.com/andresrama) [@andres_rama_hs](https://twitter.com/andres_rama_hs)
-
-[Steve Song](https://github.com/ssong-van) [@ssongvan](https://twitter.com/ssongvan)
+* [Tatsuhiro Ujihisa](https://github.com/ujihisa) [@ujm](https://twitter.com/ujm)
+* [Johnny Bufu](https://github.com/jbufu)
+* [Diego Alvarez](https://github.com/d1egoaz) [@d1egoaz](https://twitter.com/d1egoaz)
+* [Andres Rama](https://github.com/andresrama) [@andres_rama_hs](https://twitter.com/andres_rama_hs)
+* [Steve Song](https://github.com/ssong-van) [@ssongvan](https://twitter.com/ssongvan)
