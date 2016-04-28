@@ -20,3 +20,5 @@ libraryDependencies ++= Seq(
 )
 
 organization := "com.hootsuite"
+
+Settings.publishSettings
