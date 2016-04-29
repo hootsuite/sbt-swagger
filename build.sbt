@@ -21,4 +21,4 @@ libraryDependencies ++= Seq(
 
 organization := "com.hootsuite"
 
-Settings.publishSettings
+Settings.publishSettings(version.toString)

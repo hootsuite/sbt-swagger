@@ -1,11 +1,10 @@
 import bintray.BintrayPlugin.autoImport._
 import sbt.Keys._
 import sbt._
-import Version._
 
 object Settings {
-  lazy val publishSettings =
-    if (Version.project.endsWith("-SNAPSHOT"))
+   def publishSettings(version: String) =
+    if (version.endsWith("-SNAPSHOT"))
       Seq(
         publishTo := Some("Artifactory Realm" at "http://oss.jfrog.org/artifactory/oss-snapshot-local"),
         bintrayReleaseOnPublish := false,
