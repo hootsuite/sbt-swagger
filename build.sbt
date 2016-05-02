@@ -3,6 +3,8 @@ import Version._
 
 sbtPlugin := true
 publishMavenStyle := false
+bintrayRepository := "sbt-plugins"
+bintrayOrganization in bintray := None
 
 name         := "sbt-swagger"
 organization := "com.hootsuite"

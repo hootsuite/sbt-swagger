@@ -1,1 +1,1 @@
-addSbtPlugin("com.hootsuite" %% "sbt-swagger" % "1.0.0")
+addSbtPlugin("com.hootsuite" % "sbt-swagger" % "1.0.0")
