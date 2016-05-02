@@ -1,6 +1,8 @@
 ## How to try
 
-    sbt swagger
+```
+sbt swagger
+```
 
 This will generate the following 2 files, which can be rendered with [swagger-ui](http://swagger.io/swagger-ui/).
 

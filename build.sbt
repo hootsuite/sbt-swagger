@@ -4,7 +4,7 @@ sbtPlugin := true
 
 name := "sbt-swagger"
 
-version := "1.0.0-SNAPSHOT" // increment this every time when you make change!
+version := "1.0.0"
 
 // This needs to be 2.10.4 as SBT 0.13.x plugins need to be compiled against scala 2.10.
 // SBT plugins are not cross-compilable to different scala versions at this time.
