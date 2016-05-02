@@ -1,7 +1,7 @@
 ## Swagger SBT Plugin
 
 SBT plugin for extracting Swagger & JAX-RS (jsr311) annotations from compiled classes
-into Swagger API models, which are then serialized to JSON for consumption with 
+into Swagger API models, which are then serialized to JSON for consumption with
 [swagger-ui](http://swagger.io/swagger-ui/).
 
 ### Installation
@@ -16,7 +16,7 @@ Modify the following 2 files in your project as described below:
 Add `sbt-swagger` to your project's plugins:
 
 ```scala
-addSbtPlugin("com.hootsuite" %% "sbt-swagger" % "0.1.1")
+addSbtPlugin("com.hootsuite" %% "sbt-swagger" % "1.0.0")
 ```
 
 #### project/Build.scala
@@ -53,7 +53,8 @@ lazy val myProject = Project(
 
 ### Example
 
-Check https://github.com/hootsuite/sbt-swagger/tree/master/sbt-swagger-example directory. This is a small complete sample application that uses sbt-swagger.
+Check https://github.com/hootsuite/sbt-swagger/tree/master/sbt-swagger-example directory.
+This is a small complete sample application that uses sbt-swagger.
 
 ### Usage
 
@@ -63,7 +64,7 @@ Generates swagger JSON output in `target/swagger/*.json` files.
 
 ### API Annotations
 
-Swagger's `@Api*` annotations are the main markers and can be complemented with additional semantics 
+Swagger's `@Api*` annotations are the main markers and can be complemented with additional semantics
 with `javax.ws.rs.*` annotations. Neither Swagger nor JAX-RS alone offer a complete set of functionality.
 
 This extractor favors Swagger's `@Api*` annotations over `javax.ws.rs.*` ones where there is an overlap:
@@ -79,7 +80,7 @@ the generated models will use the information from Swagger's annotation.
 @ApiOperation
 @ApiResponses
 @ApiResponse
-// parameter level 
+// parameter level
 @ApiParam
 @ApiModelProperty
 // field level
@@ -150,15 +151,15 @@ case class Tweet(id: Int, userId: String, body: String)
 ### Known issues and workarounds
 
 - Repeated invocations of the `swagger` command from the sbt console won't see updated/recompiled
-classes. Need to quit/reload sbt, or run `sbt swagger` from the shell each time. 
-TODO: see issue #? moved from NOTE_DEVELOPMENT.md.
+classes. Need to quit/reload sbt, or run `sbt swagger` from the shell each time.
+TODO: see issue #6 https://github.com/hootsuite/sbt-swagger/issues/6.
 
-- All method parameters are automatically considered API parameters - 
-no option to hide some that are not part of the API. 
+- All method parameters are automatically considered API parameters -
+no option to hide some that are not part of the API.
 
-Workaround: extract a method that represents a 1:1 mapping with the actual exposed API 
-in terms of parameters and input-output models, and wrap it as necessary for pre- (validation, etc) 
-and post-processing. 
+Workaround: extract a method that represents a 1:1 mapping with the actual exposed API
+in terms of parameters and input-output models, and wrap it as necessary for pre- (validation, etc)
+and post-processing.
 
 - Map data types are not supported by the extractor.
 
@@ -166,21 +167,21 @@ Workaround: use List/Seq (and case classes).
 
 - Options are supported in models (in most cases), but not as API parameters.
 
-Workaround: perform validation outside of the designated API method, pass non-optional values to the API 
+Workaround: perform validation outside of the designated API method, pass non-optional values to the API
 (and annotate with @ApiParam(required = true|false) when necessary).
 
-- By default API parameters (all except path params) and model fields are considered optional. 
-This should be made configurable by the plugin to allow projects to minimize the amount of 
-`required = true|false` explicit annotations. 
- 
+- By default API parameters (all except path params) and model fields are considered optional.
+This should be made configurable by the plugin to allow projects to minimize the amount of
+`required = true|false` explicit annotations.
+
 Workaround: use explicit annotations:
 ```scala
 // for API parameters
-@ApiParam(required = true) 
+@ApiParam(required = true)
 // for model fields
-@ApiModelProperty(required = true) 
+@ApiModelProperty(required = true)
 // for case class fields
-@(ApiModelProperty @scala.annotation.meta.field)(required = true)  
+@(ApiModelProperty @scala.annotation.meta.field)(required = true)
 ```
 
 - Data type of API parameters and model fields is not extracted correctly for some combinations.
@@ -191,18 +192,18 @@ Workaround: use @ApiModelProperty(dataType = "...") to explicitly set it for the
 ```scala
 // "list", "set" and "array" all map to the same "array[T]" in the generated apidocs JSON
 // List container ignored for API parameters (but not for model properties)
-@ApiModelProperty(dataType = "list[CreatePostRequest]") 
-postRequests: List[CreatePostRequest]                    
+@ApiModelProperty(dataType = "list[CreatePostRequest]")
+postRequests: List[CreatePostRequest]
 ```
- 
+
 ```scala
 // extracted as Object otherwise
-@(ApiModelProperty @field)(dataType = "set[integer]")  
+@(ApiModelProperty @field)(dataType = "set[integer]")
 errors: Option[Set[Int]] = None
 @(ApiModelProperty @field)(dataType = "integer")
-minAge: Option[Int] = None,                            
+minAge: Option[Int] = None,
 ```
- 
+
 - Enum values need to be explicitly set (compiler enforces that annotation values are constants).
 
 ```scala
@@ -212,7 +213,7 @@ globalRestriction: Option[GlobalRestriction.Value] = None,
 
 ### Swagger API annotations quirks
 
-(why we need to compensate with javax.ws.rs)  
+(why we need to compensate with javax.ws.rs)
 
 ```
 @ApiOperation :
